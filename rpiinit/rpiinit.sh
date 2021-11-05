@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/sh
 
 #Systemupdates
 apt get update && apt full-upgrade
