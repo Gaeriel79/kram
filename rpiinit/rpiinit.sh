@@ -19,7 +19,8 @@ mkdir ~/.ssh && chmod 700 ~/.ssh
 
 
 # Programme
-apt install htop neofetch vim docker-ce
+apt install htop neofetch vim git
+curl -fsSL https://get.docker.com | sh
 
 #Raspi-Config
 #locale keyboard expand filesystem
