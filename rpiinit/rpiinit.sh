@@ -27,7 +27,7 @@ curl -fsSL https://get.docker.com | sh
 raspi-config
 
 #Benutzer ändern
-usermod -l pi gaeriel
+usermod -l gaeriel pi
 usermod -d /home/gaeriel -m gaeriel
 groupmod -n gaeriel pi
 passwd gaeriel
