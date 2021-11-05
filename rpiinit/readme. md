@@ -17,3 +17,8 @@ static ip_address=192.168.178.6/24
 #static ip6_address=fd51:42f8:caae:d92e::ff/64
 static routers=192.168.178.1
 static domain_name_servers=9.9.9.9
+
+sshd_config
+AddressFamily inet
+PermitRootLogin no
+PasswordAuthentication no
