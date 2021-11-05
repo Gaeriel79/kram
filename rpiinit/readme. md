@@ -1,0 +1,19 @@
+Raspberry Pi Ersteinrichtung
+
+1. Kopieren des Scripts auf den Pi
+
+2. Kopieren des SSH-Schlüssels auf den Pi
+IP-Adresse anpassen!
+
+scp $env:USERPROFILE/.ssh/id_rsa.pub pi@192.168.178.6:~/.ssh/authorized_keys
+
+3. Ausführen des Scripts
+dhcpd.config
+Hostnamen setzen
+
+# Example static IP configuration:
+interface eth0
+static ip_address=192.168.178.6/24
+#static ip6_address=fd51:42f8:caae:d92e::ff/64
+static routers=192.168.178.1
+static domain_name_servers=9.9.9.9
