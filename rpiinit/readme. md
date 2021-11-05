@@ -1,9 +1,10 @@
 Raspberry Pi Ersteinrichtung
 
-1. Kopieren des Scripts auf den Pi
+1. Kopieren des Scripts auf den Pi und Vorbereitungen
 
 wget https://github.com/Gaeriel79/kram/blob/main/rpiinit/rpiinit.sh
 chmod +x rpiinit.sh
+mkdir ~/.ssh && chmod 700 ~/.ssh
 
 2. Kopieren des SSH-Schlüssels auf den Pi von WINDOWS POWERSHELL
 IP-Adresse anpassen!
