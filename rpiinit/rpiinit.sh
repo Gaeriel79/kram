@@ -19,7 +19,7 @@ mkdir ~/.ssh && chmod 700 ~/.ssh
 
 
 # Programme
-apt install htop neofetch vim git
+apt install htop neofetch vim git unattended-upgrades
 curl -fsSL https://get.docker.com | sh
 
 #Raspi-Config
