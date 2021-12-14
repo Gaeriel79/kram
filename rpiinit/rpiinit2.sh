@@ -35,7 +35,7 @@ static domain_name_servers=${dns1}" | tee -a /etc/dhcpd.sshd_config
 hostnamectl set-hostname ${hostname}
 
 #hosts Datei ändern
-echo "127.0.0.1     ${hostname}" | tee -a /etc/hosts
+echo "127.0.1.1     ${hostname}.localdomain   ${hostname}" | tee -a /etc/hosts
 #Zeitzone
 timedatectl set-timezone Europe/Berlin
 
