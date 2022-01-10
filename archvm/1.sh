@@ -1,7 +1,7 @@
 #!/bin/sh
 
 #Install larger font
-pacman -S terminus-font
+pacman -S --noconfirm terminus-font
 setfont /usr/share/kbd/consolefonts/ter-132n.psf.gz
 
 #Keyboard Layout
