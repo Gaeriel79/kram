@@ -53,3 +53,22 @@ passwd
 #Grub einrichten
 grub-install /dev/sda
 grub-mkconfig -o /boot/grub/grub.cfg
+
+#Dienste starten
+systemctl enable NetworkManager
+systemctl enable fstrim-timer
+
+#Benutzer erstellen
+useradd -m gaeriel
+passwd
+usermod -aG wheel
+#wheel Gruppe bearbeiten für sudo / Den zweiten Eintrag für Wheel Gruppe auskommentieren
+EDITOR=vim visudo
+
+#BTRFS 
+sed -i 's/MODULES=()/MODULES=(btrfs)/' /etc/mkinitcpio.conf
+mkinitcpio -p linux-zen
+
+exit
+umount -R /mnt
+
