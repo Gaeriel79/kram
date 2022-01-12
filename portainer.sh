@@ -2,6 +2,7 @@
 
 #Anleitung: 
 #
+#Skript ausführbar machen (nur einmal erforderlich, nach dem herunterladen) sudo chmod +x portainer.sh
 #Starten mit sudo ./portainer.sh
 
 #Laufenden Container stoppen und entfernen
