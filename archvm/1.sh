@@ -13,4 +13,4 @@ timedatectl set-ntp true
 #pacman sync check
 pacman -Sy
 
-chmod +x 2.sh
+chmod +x k2.sh
