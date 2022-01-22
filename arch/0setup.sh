@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 #-------------------------------------------------------------------------
 SCRIPT_DIR="$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )"
+loadkeys de-latin1
 echo -ne "
 
 Setting up mirrors for optimal download
@@ -11,7 +12,7 @@ timedatectl set-ntp true
 pacman -S --noconfirm pacman-contrib terminus-font
 setfont ter-v22b
 sed -i 's/^#ParallelDownloads/ParallelDownloads/' /etc/pacman.conf
-pacman -S --noconfirm reflector rsync grub btrfs-progs
+pacman -S --noconfirm reflector rsync grub btrfs-progs os-prober
 cp /etc/pacman.d/mirrorlist /etc/pacman.d/mirrorlist.backup
 echo -ne "
 -------------------------------------------------------------------------
