@@ -1,25 +1,14 @@
 #!/usr/bin/env bash
 #-------------------------------------------------------------------------
 SCRIPT_DIR="$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )"
-loadkeys de-latin1
-echo -ne "
+#loadkeys de-latin1
 
-Setting up mirrors for optimal download
-"
 source setup.conf
-iso=$(curl -4 ifconfig.co/country-iso)
 timedatectl set-ntp true
 pacman -S --noconfirm pacman-contrib terminus-font
 setfont ter-v22b
 sed -i 's/^#ParallelDownloads/ParallelDownloads/' /etc/pacman.conf
-pacman -S --noconfirm reflector rsync grub btrfs-progs
-cp /etc/pacman.d/mirrorlist /etc/pacman.d/mirrorlist.backup
-echo -ne "
--------------------------------------------------------------------------
-                    Setting up $iso mirrors for faster downloads
--------------------------------------------------------------------------
-"
-reflector -a 48 -c $iso -f 5 -l 20 --sort rate --save /etc/pacman.d/mirrorlist
+
 
 lsblk
 gdisk
@@ -58,7 +47,7 @@ mkdir /mnt/boot
 mkdir /mnt/boot/efi
 mount -t vfat -L EFIBOOT /mnt/boot/
 
-pacstrap /mnt base base-devel linux-zen linux-zen-firmware vim sudo archlinux-keyring wget --noconfirm --needed
+pacstrap /mnt base base-devel linux-zen linux-zen-firmware vim sudo archlinux-keyring wget btrfs-progs os-prober --noconfirm --needed
 cp -R ${SCRIPT_DIR} /mnt/root/arch
 cp /etc/pacman.d/mirrorlist /mnt/etc/pacman.d/mirrorlist
 echo -ne "
