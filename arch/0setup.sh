@@ -1,5 +1,14 @@
 #!/usr/bin/env bash
 #-------------------------------------------------------------------------
+echo -ne "
+ ██████╗  █████╗ ███████╗██████╗ ██╗███████╗██╗  ███████╗ █████╗ 
+██╔════╝ ██╔══██╗██╔════╝██╔══██╗██║██╔════╝██║  ╚════██║██╔══██╗
+██║  ███╗███████║█████╗  ██████╔╝██║█████╗  ██║      ██╔╝╚██████║
+██║   ██║██╔══██║██╔══╝  ██╔══██╗██║██╔══╝  ██║     ██╔╝  ╚═══██║
+╚██████╔╝██║  ██║███████╗██║  ██║██║███████╗███████╗██║   █████╔╝
+ ╚═════╝ ╚═╝  ╚═╝╚══════╝╚═╝  ╚═╝╚═╝╚══════╝╚══════╝╚═╝   ╚════╝ 
+                                                                 
+ "
 SCRIPT_DIR="$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )"
 #loadkeys de-latin1
 
@@ -12,39 +21,37 @@ sed -i 's/^#ParallelDownloads/ParallelDownloads/' /etc/pacman.conf
 
 lsblk
 gdisk
-# make filesystems
-createsubvolumes () {
-    btrfs subvolume create /mnt/@
-    btrfs subvolume create /mnt/@home
-    btrfs subvolume create /mnt/@var
-    btrfs subvolume create /mnt/@tmp
-    btrfs subvolume create /mnt/@.snapshots
-}
 
-mountallsubvol () {
-    mount -o ${mountoptions},subvol=@home /dev/mapper/ROOT /mnt/home
-    mount -o ${mountoptions},subvol=@tmp /dev/mapper/ROOT /mnt/tmp
-    mount -o ${mountoptions},subvol=@.snapshots /dev/mapper/ROOT /mnt/.snapshots
-    mount -o ${mountoptions},subvol=@var /dev/mapper/ROOT /mnt/var
-}
+mkfs.vfat /dev/sda1
+mkfs.btrfs /dev/sda2
+mount /dev/sda2 /mnt
+cd /mnt
 
-# now format that container
-#    mkfs.btrfs -L ROOT /dev/mapper/ROOT
-# create subvolumes for btrfs
-#    mount -t btrfs /dev/mapper/ROOT /mnt
-    createsubvolumes       
-    umount /mnt
-# mount @ subvolume
-    mount -o ${mountoptions},subvol=@ /dev/mapper/ROOT /mnt
-# make directories home, .snapshots, var, tmp
-    mkdir -p /mnt/{home,var,tmp,.snapshots}
-# mount subvolumes
-    mountallsubvol
+# create subvolumes
+btrfs subvolume create @
+btrfs subvolume create @home
+btrfs subvolume create @var
+btrfs subvolume create @tmp
+btrfs subvolume create @swap
+btrfs subvolume create @opt
+btrfs subvolume create @srv
+btrfs subvolume create @.snapshots
 
+umount /mnt
 
-# mount target
-mkdir /mnt/boot
+#mount subvolumes
+
+mount -o noatime,compress=zstd,space_cache=v2,discard=async,subvol=@ /dev/sda2    
+mkdir /mnt{boot,home,var,tmp,swap,opt,srv}
 mkdir /mnt/boot/efi
+mount -o noatime,compress=zstd,space_cache=v2,discard=async,subvol=@home /dev/sda2 /mnt/home
+mount -o noatime,compress=zstd,space_cache=v2,discard=async,subvol=@var /dev/sda2 /mnt/var
+mount -o noatime,compress=zstd,space_cache=v2,discard=async,subvol=@tmp /dev/sda2 /mnt/tmp
+mount -o noatime,compress=zstd,space_cache=v2,discard=async,subvol=@opt /dev/sda2 /mnt/opt
+mount -o noatime,compress=zstd,space_cache=v2,discard=async,subvol=@opt /dev/sda2 /mnt/opt
+#mount -o noatime,compress=zstd,space_cache=v2,discard=async,subvol=@swap /dev/sda2 /mnt/swap
+#mount -o noatime,compress=zstd,space_cache=v2,discard=async,subvol=@.snapshots /dev/sda2 /mnt/.snapshots
+#mount /dev/sda1 /mnt/boot
 mount -t vfat -L EFIBOOT /mnt/boot/
 
 pacstrap /mnt base base-devel linux-zen linux-zen-firmware vim sudo archlinux-keyring wget btrfs-progs os-prober --noconfirm --needed
