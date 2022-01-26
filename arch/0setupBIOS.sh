@@ -39,12 +39,10 @@ btrfs subvolume create @opt
 btrfs subvolume create @srv
 btrfs subvolume create @.snapshots
 
-umount /mnt
-
 #mount subvolumes
 
 mount -o noatime,compress=zstd,space_cache=v2,discard=async,subvol=@ /dev/sda1    
-mkdir /mnt{boot,home,var,tmp,swap,opt,srv}
+mkdir /mnt/{boot,home,var,tmp,swap,opt,srv}
 mkdir /mnt/boot/efi
 mount -o noatime,compress=zstd,space_cache=v2,discard=async,subvol=@home /dev/sda1 /mnt/home
 mount -o noatime,compress=zstd,space_cache=v2,discard=async,subvol=@var /dev/sda1 /mnt/var
