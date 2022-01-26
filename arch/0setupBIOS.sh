@@ -8,6 +8,9 @@ echo -ne "
 ╚██████╔╝██║  ██║███████╗██║  ██║██║███████╗███████╗██║   █████╔╝
  ╚═════╝ ╚═╝  ╚═╝╚══════╝╚═╝  ╚═╝╚═╝╚══════╝╚══════╝╚═╝   ╚════╝                                                                 
 "
+set -x
+trap read debug
+
 SCRIPT_DIR="$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )"
 #loadkeys de-latin1
 
@@ -19,12 +22,8 @@ sed -i 's/^#ParallelDownloads/ParallelDownloads/' /etc/pacman.conf
 
 
 lsblk
-fdisk /dev/sda1
-# o >Enter New Partiotion Table
-# n >Enter p >Enter >Enter >Enter Create 1 Partition, Full Disk size
-# t >Enter 83 >Enter Set Partitiontype to Linux
-# a >Enter  Activate Partition
-# w >Enter  Write chages to Disk
+gdisk /dev/sda1
+
 
 mkfs.btrfs /dev/sda1
 mount /dev/sda1 /mnt
@@ -57,9 +56,11 @@ mount -o noatime,compress=zstd,space_cache=v2,discard=async,subvol=@opt /dev/sda
 #mount /dev/sda1 /mnt/boot
 
 
-pacstrap /mnt base base-devel linux-zen linux-zen-firmware vim git sudo archlinux-keyring wget btrfs-progs os-prober dosfstools mtools grub efibootmgr --noconfirm --needed
+pacstrap /mnt base base-devel linux-zen linux-zen-headers linux-firmware vim git sudo archlinux-keyring wget btrfs-progs os-prober dosfstools mtools grub efibootmgr --noconfirm --needed
+
 genfstab -U /mnt >> /mnt/etc/fstab
 grub-install --target=i386-pc --recheck /dev/sda
+
 cp -R ${SCRIPT_DIR} /mnt/root/arch
 cp /etc/pacman.d/mirrorlist /mnt/etc/pacman.d/mirrorlist
 arch-chroot /mnt
