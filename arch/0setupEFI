@@ -54,9 +54,12 @@ mount -o noatime,compress=zstd,space_cache=v2,discard=async,subvol=@opt /dev/sda
 #mount /dev/sda1 /mnt/boot
 mount -t vfat -L EFIBOOT /mnt/boot/
 
-pacstrap /mnt base base-devel linux-zen linux-zen-firmware vim sudo archlinux-keyring wget btrfs-progs os-prober --noconfirm --needed
+pacstrap /mnt base base-devel linux-zen linux-zen-firmware vim git sudo archlinux-keyring wget btrfs-progs os-prober --noconfirm --needed
+genfstab -U /mnt >> /mnt/etc/fstab
+
 cp -R ${SCRIPT_DIR} /mnt/root/arch
 cp /etc/pacman.d/mirrorlist /mnt/etc/pacman.d/mirrorlist
+
 echo -ne "
 -------------------------------------------------------------------------
                     Checking for low memory systems <8G
@@ -76,3 +79,5 @@ if [[  $TOTALMEM -lt 8000000 ]]; then
     echo "/opt/swap/swapfile	none	swap	sw	0	0" >> /mnt/etc/fstab # Add swap to fstab, so it KEEPS working after installation.
 fi
 echo -ne "
+
+arch-chroot /mnt
