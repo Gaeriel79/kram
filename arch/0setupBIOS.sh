@@ -63,7 +63,4 @@ genfstab -U /mnt >> /mnt/etc/fstab
 grub-install --target=i386-pc --recheck /dev/sda
 cp -R ${SCRIPT_DIR} /mnt/root/arch
 cp /etc/pacman.d/mirrorlist /mnt/etc/pacman.d/mirrorlist
-
-
-
 arch-chroot /mnt
