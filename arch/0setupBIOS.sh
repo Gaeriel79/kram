@@ -8,7 +8,7 @@ echo -ne "
 ╚██████╔╝██║  ██║███████╗██║  ██║██║███████╗███████╗██║   █████╔╝
  ╚═════╝ ╚═╝  ╚═╝╚══════╝╚═╝  ╚═╝╚═╝╚══════╝╚══════╝╚═╝   ╚════╝ 
                                                                  
- "
+"
 SCRIPT_DIR="$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )"
 #loadkeys de-latin1
 
@@ -21,11 +21,11 @@ sed -i 's/^#ParallelDownloads/ParallelDownloads/' /etc/pacman.conf
 
 lsblk
 fdisk /dev/sda1
-# o >Enter #New Partiotion Table
-# n >Enter p >Enter >Enter >Enter #Create 1 Partition, Full Disk size
-# t >Enter 83 >Enter #Set Partitiontype to Linux
-# a >Enter # Activate Partition
-# w >Enter # Write chages to Disk
+# o >Enter New Partiotion Table
+# n >Enter p >Enter >Enter >Enter Create 1 Partition, Full Disk size
+# t >Enter 83 >Enter Set Partitiontype to Linux
+# a >Enter  Activate Partition
+# w >Enter  Write chages to Disk
 
 mkfs.btrfs /dev/sda1
 mount /dev/sda1 /mnt
