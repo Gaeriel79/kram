@@ -14,7 +14,7 @@ trap read debug
 SCRIPT_DIR="$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )"
 #loadkeys de-latin1
 
-source setup.conf
+#source setup.conf
 timedatectl set-ntp true
 pacman -S --noconfirm pacman-contrib terminus-font
 setfont ter-v22b
@@ -22,7 +22,7 @@ sed -i 's/^#ParallelDownloads/ParallelDownloads/' /etc/pacman.conf
 
 
 lsblk
-gdisk /dev/sda1
+gdisk /dev/sda
 
 
 mkfs.btrfs /dev/sda1
@@ -61,6 +61,7 @@ pacstrap /mnt base base-devel linux-zen linux-zen-headers linux-firmware vim git
 genfstab -U /mnt >> /mnt/etc/fstab
 grub-install --target=i386-pc --recheck /dev/sda
 
+mkdir /mnt/root/arch
 cp -R ${SCRIPT_DIR} /mnt/root/arch
 cp /etc/pacman.d/mirrorlist /mnt/etc/pacman.d/mirrorlist
 arch-chroot /mnt
