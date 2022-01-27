@@ -26,12 +26,12 @@ Include = /etc/pacman.d/mirrorlist/[community]
 Include = /etc/pacman.d/mirrorlist
 
 [quarry]
-Server = http://ghome:9129/repo/quarry
+Server = http://192.168.178.131:9129/repo/quarry
 
 [sublime-text]
-Server = http://ghome:9129/repo/sublime/' /etc/pacman.conf
+Server = http://192.168.178.131:9129/repo/sublime/' /etc/pacman.conf
 
-echo "Server = http://ghome:9129/repo/archlinux/$repo/os/$arch" > /etc/pacman.d/mirrorlist
+echo "Server = http://192.168.178.131:9129/repo/archlinux/$repo/os/$arch" > /etc/pacman.d/mirrorlist
 
 
 lsblk
