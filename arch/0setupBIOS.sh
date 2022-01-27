@@ -31,7 +31,7 @@ Server = http://192.168.178.131:9129/repo/quarry
 [sublime-text]
 Server = http://192.168.178.131:9129/repo/sublime+' /etc/pacman.conf
 
-echo "Server = http://192.168.178.131:9129/repo/archlinux/$repo/os/$arch" > /etc/pacman.d/mirrorlist
+echo 'Server = http://192.168.178.131:9129/repo/archlinux/$repo/os/$arch' > /etc/pacman.d/mirrorlist
 
 
 lsblk
