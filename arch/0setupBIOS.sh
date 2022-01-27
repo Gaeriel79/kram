@@ -31,7 +31,7 @@ gdisk /dev/sda
 
 mkfs.btrfs -f /dev/sda1
 mount /dev/sda1 /mnt
-cd /mnt
+#cd /mnt
 
 # create subvolumes
 btrfs subvolume create @
