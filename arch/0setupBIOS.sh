@@ -14,25 +14,16 @@ trap read debug
 SCRIPT_DIR="$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )"
 #loadkeys de-latin1
 
+#local pacman proxy
+chmod +x proxy.sh
+./proxy.sh
+
 #source setup.conf
 timedatectl set-ntp true
 pacman -S --noconfirm pacman-contrib terminus-font
 setfont ter-v22b
 sed -i 's/^#ParallelDownloads/ParallelDownloads/' /etc/pacman.conf
 
-#Set pacman local proxy mirror
-sed -i 's+^[community]
-Include = /etc/pacman.d/mirrorlist+[community]
-Include = /etc/pacman.d/mirrorlist
-
-[quarry]
-Server = http://192.168.178.131:9129/repo/quarry
-
-[sublime-text]
-Server = http://192.168.178.131:9129/repo/sublime+/' /etc/pacman.conf
-
-echo 'Server = http://192.168.178.131:9129/repo/archlinux/$repo/os/$arch' > /etc/pacman.d/mirrorlist
-cat /etc/pacman.d/mirrorlist
 
 lsblk
 gdisk /dev/sda
@@ -54,7 +45,7 @@ btrfs subvolume create @.snapshots
 
 #mount subvolumes
 
-mount -o noatime,compress=zstd,space_cache=v2,discard=async,subvol=@ /dev/sda1    
+mount -o noatime,compress=zstd,space_cache=v2,discard=async,subvol=@ /dev/sda1 /mnt   
 mkdir /mnt/{boot,home,var,tmp,swap,opt,srv}
 mkdir /mnt/boot/efi
 mount -o noatime,compress=zstd,space_cache=v2,discard=async,subvol=@home /dev/sda1 /mnt/home
