@@ -29,7 +29,7 @@ Include = /etc/pacman.d/mirrorlist
 Server = http://192.168.178.131:9129/repo/quarry
 
 [sublime-text]
-Server = http://192.168.178.131:9129/repo/sublime+' /etc/pacman.conf
+Server = http://192.168.178.131:9129/repo/sublime+/' /etc/pacman.conf
 
 echo 'Server = http://192.168.178.131:9129/repo/archlinux/$repo/os/$arch' > /etc/pacman.d/mirrorlist
 cat /etc/pacman.d/mirrorlist
@@ -38,7 +38,7 @@ lsblk
 gdisk /dev/sda
 
 
-mkfs.btrfs /dev/sda1
+mkfs.btrfs -f /dev/sda1
 mount /dev/sda1 /mnt
 cd /mnt
 
