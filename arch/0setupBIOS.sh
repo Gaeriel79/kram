@@ -44,7 +44,7 @@ btrfs subvolume create @srv
 btrfs subvolume create @.snapshots
 
 #mount subvolumes
-umount /mnt
+umount -l /mnt
 mount -o noatime,compress=zstd,space_cache=v2,discard=async,subvol=@ /dev/sda1 /mnt   
 mkdir /mnt/{boot,home,var,tmp,swap,opt,srv}
 mkdir /mnt/boot/efi
@@ -52,13 +52,13 @@ mount -o noatime,compress=zstd,space_cache=v2,discard=async,subvol=@home /dev/sd
 mount -o noatime,compress=zstd,space_cache=v2,discard=async,subvol=@var /dev/sda1 /mnt/var
 mount -o noatime,compress=zstd,space_cache=v2,discard=async,subvol=@tmp /dev/sda1 /mnt/tmp
 mount -o noatime,compress=zstd,space_cache=v2,discard=async,subvol=@opt /dev/sda1 /mnt/opt
-mount -o noatime,compress=zstd,space_cache=v2,discard=async,subvol=@opt /dev/sda1 /mnt/opt
+mount -o noatime,compress=zstd,space_cache=v2,discard=async,subvol=@srv /dev/sda1 /mnt/srv
 #mount -o noatime,compress=zstd,space_cache=v2,discard=async,subvol=@swap /dev/sda1 /mnt/swap
 #mount -o noatime,compress=zstd,space_cache=v2,discard=async,subvol=@.snapshots /dev/sda1 /mnt/.snapshots
 mount /dev/sda1 /mnt/boot
 
 
-pacstrap /mnt git vim kitty tldr kate xmonad xmonad.contrib base-devel linux-zen linux-zen-headers linux-firmware vim git sudo archlinux-keyring wget btrfs-progs os-prober dosfstools mtools grub efibootmgr --noconfirm --needed
+pacstrap /mnt git vim kitty tldr kate xmonad xmonad-contrib base-devel linux-zen linux-zen-headers linux-firmware vim git sudo archlinux-keyring wget btrfs-progs os-prober dosfstools mtools grub efibootmgr --noconfirm --needed
 
 genfstab -U /mnt >> /mnt/etc/fstab
 
