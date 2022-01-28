@@ -44,7 +44,7 @@ sgdisk -a 2048 -o ${DISK} # new gpt disk 2048 alignment
 
 # create partitions
 sgdisk -n 1::+1M --typecode=1:ef02 --change-name=1:'BIOSBOOT' /dev/sda # partition 1 (BIOS Boot Partition)
-sgdisk -n 2::-0 --typecode=3:8300 --change-name=2:'ROOT' /dev/sda # partition 2 (Root), default start, remaining
+sgdisk -n 2::-0 --typecode=2:8300 --change-name=2:'ROOT' /dev/sda # partition 2 (Root), default start, remaining
 
 mkfs.btrfs -f /dev/sda2
 mount /dev/sda2 /mnt
