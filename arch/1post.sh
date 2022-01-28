@@ -1,3 +1,13 @@
+#DEBUG
+#DEBUG
+#DEBUG
+set -x
+trap read debug
+#DEBUG
+#DEBUG
+#DEBUG
+
+
 ln -sf /usr/share/zoneinfo/Europe/Berlin /etc/localtime
 hwclock --systohc
 sed -i '177s/.//' /etc/locale.gen
