@@ -13,7 +13,8 @@ hwclock --systohc
 sed -i '177s/.//' /etc/locale.gen
 locale-gen
 echo "LANG=en_US.UTF-8" >> /etc/locale.conf
-echo "KEYMAP=de_DE-latin1" >> /etc/vconsole.conf
+echo "KEYMAP=de-latin1" >> /etc/vconsole.conf
+echo "FONT=eurlatgr" >> /etc/vconsole.conf
 echo "archvm" >> /etc/hostname
 echo "127.0.0.1 localhost" >> /etc/hosts
 echo "::1       localhost" >> /etc/hosts
