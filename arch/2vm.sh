@@ -21,7 +21,6 @@ echo "127.0.1.1 archvm.localdomain archvm" >> /etc/hosts
 echo "root Passwort ändern"
 passwd
 
-echo -ne"
 -------------------------------------------------------------------------
                     Installing Base System  
 -------------------------------------------------------------------------
@@ -32,7 +31,7 @@ do
     echo "INSTALLING: ${line}"
    sudo pacman -S --noconfirm --needed ${line}
 done
-
+echo -ne "
 
 echo -ne "
 -------------------------------------------------------------------------
@@ -67,7 +66,7 @@ elif grep -E "Integrated Graphics Controller" <<< ${gpu_type}; then
 elif grep -E "Intel Corporation UHD" <<< ${gpu_type}; then
     pacman -S libva-intel-driver libvdpau-va-gl lib32-vulkan-intel vulkan-intel libva-intel-driver libva-utils lib32-mesa --needed --noconfirm
 fi
-grub-install --target=i386-pc /dev/sda1 # replace sdx with your disk name, not the partition
+grub-install --target=i386-pc /dev/sda # replace sdx with your disk name, not the partition
 grub-mkconfig -o /boot/grub/grub.cfg
 
 #Enable Services
