@@ -67,7 +67,7 @@ mount -o noatime,compress=zstd,space_cache=v2,discard=async,subvol=@opt /dev/sda
 mount -o noatime,compress=zstd,space_cache=v2,discard=async,subvol=@srv /dev/sda1 /mnt/srv
 #mount -o noatime,compress=zstd,space_cache=v2,discard=async,subvol=@swap /dev/sda1 /mnt/swap
 #mount -o noatime,compress=zstd,space_cache=v2,discard=async,subvol=@.snapshots /dev/sda1 /mnt/.snapshots
-#mount /dev/sda1 /mnt/boot
+mount /dev/sda1 /mnt/boot
 
 
 pacstrap /mnt git vim kitty tldr kate xmonad xmonad-contrib base-devel linux-zen linux-zen-headers linux-firmware vim git sudo archlinux-keyring wget btrfs-progs os-prober dosfstools mtools grub efibootmgr --noconfirm --needed
