@@ -34,7 +34,7 @@ chmod +x 1post.sh
 timedatectl set-ntp true
 pacman -S --noconfirm pacman-contrib terminus-font
 setfont ter-v22b
-sed -i 's/^#ParallelDownloads/ParallelDownloads/' /etc/pacman.conf
+#sed -i 's/^#ParallelDownloads/ParallelDownloads/' /etc/pacman.conf
 
 
 lsblk
@@ -63,7 +63,7 @@ btrfs subvolume create @.snapshots
 #mount subvolumes
 umount -l /mnt
 mount -o noatime,compress=zstd,space_cache=v2,discard=async,subvol=@ /dev/sda2 /mnt   
-mkdir /mnt/{boot,home,var,tmp,swap,opt,srv}
+mkdir /mnt/{boot,home,var,tmp,swap,opt,srv,.snapshots}
 mkdir /mnt/boot
 mount -o noatime,compress=zstd,space_cache=v2,discard=async,subvol=@home /dev/sda2 /mnt/home
 mount -o noatime,compress=zstd,space_cache=v2,discard=async,subvol=@var /dev/sda2 /mnt/var
