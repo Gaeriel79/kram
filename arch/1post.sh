@@ -18,12 +18,20 @@ echo "archvm" >> /etc/hostname
 echo "127.0.0.1 localhost" >> /etc/hosts
 echo "::1       localhost" >> /etc/hosts
 echo "127.0.1.1 archvm.localdomain archvm" >> /etc/hosts
-echo root:password | chpasswd
+echo "root Passwort ändern"
+passwd
 
-# You can add xorg to the installation packages, I usually add it at the DE or WM install script
-# You can remove the tlp package if you are installing on a desktop or vm
+-------------------------------------------------------------------------
+                    Installing Base System  
+-------------------------------------------------------------------------
+"
+cat /root/arch/pkglistbase | while read line 
 
-pacman -S --noconfirm sudo snapper picom dhclient reflector wget cronie grub networkmanager network-manager-applet tlp dialog wpa_supplicant mtools dosfstools reflector base-devel linux-zen-headers avahi xdg-user-dirs xdg-utils gvfs gvfs-smb nfs-utils inetutils dnsutils bluez bluez-utils cups hplip alsa-utils pulseaudio bash-completion openssh rsync reflector acpi acpi_call tlp edk2-ovmf bridge-utils dnsmasq vde2 openbsd-netcat iptables-nft ipset firewalld flatpak sof-firmware nss-mdns acpid os-prober ntfs-3g terminus-font
+do
+    echo "INSTALLING: ${line}"
+   sudo pacman -S --noconfirm --needed ${line}
+done
+echo -ne "
 
 #pipewire
 sudo pacman -S --noconfirm --needed pipewire pipewire-media-session pipewire-alsa pipewire-jack pipewire-zeroconf
