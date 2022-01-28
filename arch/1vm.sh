@@ -71,7 +71,7 @@ mount -o noatime,compress=zstd,space_cache=v2,discard=async,subvol=@tmp /dev/sda
 mount -o noatime,compress=zstd,space_cache=v2,discard=async,subvol=@opt /dev/sda2 /mnt/opt
 mount -o noatime,compress=zstd,space_cache=v2,discard=async,subvol=@srv /dev/sda2 /mnt/srv
 #mount -o noatime,compress=zstd,space_cache=v2,discard=async,subvol=@swap /dev/sda1 /mnt/swap
-mount -o noatime,compress=zstd,space_cache=v2,discard=async,subvol=@.snapshots /dev/sda1 /mnt/.snapshots
+mount -o noatime,compress=zstd,space_cache=v2,discard=async,subvol=@.snapshots /dev/sda2 /mnt/.snapshots
 mount /dev/sda2 /mnt/boot
 
 #Install base packages

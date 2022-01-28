@@ -71,3 +71,6 @@ grub-mkconfig -o /boot/grub/grub.cfg
 
 #Enable Services
 systemctl enable NetworkManager
+
+sed -i 's/^MODULES()/MODULES(btrfs)/' /etc/mkinitcpio.conf
+mkinitcpio -p linux-zen
