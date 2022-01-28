@@ -8,8 +8,17 @@ echo -ne "
 ╚██████╔╝██║  ██║███████╗██║  ██║██║███████╗███████╗██║   █████╔╝
  ╚═════╝ ╚═╝  ╚═╝╚══════╝╚═╝  ╚═╝╚═╝╚══════╝╚══════╝╚═╝   ╚════╝                                                                 
 "
+#DEBUG
+#DEBUG
+#DEBUG
+passwd
+systemctl start sshd.service
 set -x
 trap read debug
+ip a
+#DEBUG
+#DEBUG
+#DEBUG
 
 SCRIPT_DIR="$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )"
 #loadkeys de-latin1
@@ -82,7 +91,7 @@ echo root:password | chpasswd
 # You can add xorg to the installation packages, I usually add it at the DE or WM install script
 # You can remove the tlp package if you are installing on a desktop or vm
 
-pacman -S --noconfirm sudo snapper picom dhclient reflector wget cronie grub networkmanager network-manager-applet tlp dialog wpa_supplicant mtools dosfstools reflector base-devel linux-zen-headers avahi xdg-user-dirs xdg-utils gvfs gvfs-smb nfs-utils inetutils dnsutils bluez bluez-utils cups hplip alsa-utils pulseaudio bash-completion openssh rsync reflector acpi acpi_call tlp virt-manager qemu qemu-arch-extra edk2-ovmf bridge-utils dnsmasq vde2 openbsd-netcat iptables-nft ipset firewalld flatpak sof-firmware nss-mdns acpid os-prober ntfs-3g terminus-font
+pacman -S --noconfirm sudo snapper picom dhclient reflector wget cronie grub networkmanager network-manager-applet tlp dialog wpa_supplicant mtools dosfstools reflector base-devel linux-zen-headers avahi xdg-user-dirs xdg-utils gvfs gvfs-smb nfs-utils inetutils dnsutils bluez bluez-utils cups hplip alsa-utils pulseaudio bash-completion openssh rsync reflector acpi acpi_call tlp edk2-ovmf bridge-utils dnsmasq vde2 openbsd-netcat iptables-nft ipset firewalld flatpak sof-firmware nss-mdns acpid os-prober ntfs-3g terminus-font
 
 #pipewire
 sudo pacman -S --noconfirm --needed pipewire
