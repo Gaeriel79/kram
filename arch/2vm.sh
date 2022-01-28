@@ -21,6 +21,7 @@ echo "127.0.1.1 archvm.localdomain archvm" >> /etc/hosts
 echo "root Passwort ändern"
 passwd
 
+echo -ne"
 -------------------------------------------------------------------------
                     Installing Base System  
 -------------------------------------------------------------------------
@@ -31,7 +32,7 @@ do
     echo "INSTALLING: ${line}"
    sudo pacman -S --noconfirm --needed ${line}
 done
-echo -ne "
+
 
 echo -ne "
 -------------------------------------------------------------------------
