@@ -69,7 +69,7 @@ elif grep -E "Intel Corporation UHD" <<< ${gpu_type}; then
     pacman -S libva-intel-driver libvdpau-va-gl lib32-vulkan-intel vulkan-intel libva-intel-driver libva-utils lib32-mesa --needed --noconfirm
 fi
 
-cho -ne "
+echo -ne "
 -------------------------------------------------------------------------
                     Checking for low memory systems <8G
 -------------------------------------------------------------------------
@@ -78,12 +78,12 @@ TOTALMEM=$(cat /proc/meminfo | grep -i 'memtotal' | grep -o '[[:digit:]]*')
 if [[  $TOTALMEM -lt 8000000 ]]; then
     # Put swap into the actual system, not into RAM disk, otherwise there is no point in it, it'll cache RAM into RAM. So, /mnt/ everything.
     #mkdir /mnt/opt/swap # make a dir that we can apply NOCOW to to make it btrfs-friendly.
-    chattr +C /mnt/swap # apply NOCOW, btrfs needs that.
-    dd if=/dev/zero of=/mnt/swap/swapfile bs=1M count=2048 status=progress
-    chmod 600 /mnt/swap/swapfile # set permissions.
-    chown root /mnt/swap/swapfile
-    mkswap /mnt/swap/swapfile
-    swapon /mnt/swap/swapfile
+    chattr +C /swap # apply NOCOW, btrfs needs that.
+    dd if=/dev/zero of=/swap/swapfile bs=1M count=2048 status=progress
+    chmod 600 /swap/swapfile # set permissions.
+    chown root /swap/swapfile
+    mkswap /swap/swapfile
+    swapon /swap/swapfile
     # The line below is written to /mnt/ but doesn't contain /mnt/, since it's just / for the system itself.
     echo "/swap/swapfile	none	swap	sw	0	0" >> /mnt/etc/fstab # Add swap to fstab, so it KEEPS working after installation.
 fi
