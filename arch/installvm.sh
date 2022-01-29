@@ -37,4 +37,4 @@ SCRIPT_DIR="$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
 bash ./proxy.sh
 bash 1vm.sh
 arch-chroot /mnt /root/arch/2vm.sh
-bash 3post.sh
+#bash 3post.sh
