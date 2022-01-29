@@ -1,5 +1,6 @@
 #!/usr/bin/env bash
 #Snapper Configuration
+pacman -S snapper snap-pac --noconfirm --needed
 umount /.snapshots/
 rm -rf /.snapshots/
 

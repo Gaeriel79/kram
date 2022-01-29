@@ -8,9 +8,7 @@ echo -ne "
 ╚██████╔╝██║  ██║███████╗██║  ██║██║███████╗███████╗██║   █████╔╝
  ╚═════╝ ╚═╝  ╚═╝╚══════╝╚═╝  ╚═╝╚═╝╚══════╝╚══════╝╚═╝   ╚════╝                                                                 
 "
-#make additionals scripts executeable
-chmod +x 2vm.sh
-chmod +x 3post.sh
+
 #DEBUG
 #DEBUG
 #DEBUG

@@ -2,5 +2,3 @@ grub-btrfs
 network-manager-applet
 networkmanager
 rsync
-snapper
-snap-pac
