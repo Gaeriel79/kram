@@ -8,13 +8,16 @@ echo -ne "
 ╚██████╔╝██║  ██║███████╗██║  ██║██║███████╗███████╗██║   █████╔╝
  ╚═════╝ ╚═╝  ╚═╝╚══════╝╚═╝  ╚═╝╚═╝╚══════╝╚══════╝╚═╝   ╚════╝                                                                 
 "
+#make additionals scripts executeable
+chmod +x 2vm.sh
+chmod +x 3post.sh
 #DEBUG
 #DEBUG
 #DEBUG
 passwd
 systemctl start sshd.service
-set -x
-trap read debug
+#set -x
+#trap read debug
 ip a
 #DEBUG
 #DEBUG
@@ -70,12 +73,12 @@ mount -o noatime,compress=zstd,space_cache=v2,discard=async,subvol=@var /dev/sda
 mount -o noatime,compress=zstd,space_cache=v2,discard=async,subvol=@tmp /dev/sda2 /mnt/tmp
 mount -o noatime,compress=zstd,space_cache=v2,discard=async,subvol=@opt /dev/sda2 /mnt/opt
 mount -o noatime,compress=zstd,space_cache=v2,discard=async,subvol=@srv /dev/sda2 /mnt/srv
-#mount -o noatime,compress=zstd,space_cache=v2,discard=async,subvol=@swap /dev/sda1 /mnt/swap
+mount -o noatime,compress=zstd,space_cache=v2,discard=async,subvol=@swap /dev/sda2 /mnt/swap
 mount -o noatime,compress=zstd,space_cache=v2,discard=async,subvol=@.snapshots /dev/sda2 /mnt/.snapshots
 mount /dev/sda2 /mnt/boot
 
 #Install base packages
-pacstrap /mnt git vim base base-devel linux-zen linux-zen-headers linux-firmware sudo archlinux-keyring wget btrfs-progs os-prober dosfstools mtools grub efibootmgr --noconfirm --needed
+pacstrap /mnt git vim base base-devel linux-zen linux-zen-headers linux-firmware sudo archlinux-keyring wget btrfs-progs os-prober dosfstools mtools grub efibootmgr
 
 cd /
 genfstab -U /mnt >> /mnt/etc/fstab

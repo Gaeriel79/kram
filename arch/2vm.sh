@@ -1,3 +1,4 @@
+#!/usr/bin/env bash
 #DEBUG
 #DEBUG
 #DEBUG
@@ -20,7 +21,7 @@ echo "127.0.0.1 localhost" >> /etc/hosts
 echo "::1       localhost" >> /etc/hosts
 echo "127.0.1.1 archvm.localdomain archvm" >> /etc/hosts
 echo "root Passwort ändern"
-passwd
+#passwd
 
 echo -ne "
 -------------------------------------------------------------------------
@@ -67,6 +68,26 @@ elif grep -E "Integrated Graphics Controller" <<< ${gpu_type}; then
 elif grep -E "Intel Corporation UHD" <<< ${gpu_type}; then
     pacman -S libva-intel-driver libvdpau-va-gl lib32-vulkan-intel vulkan-intel libva-intel-driver libva-utils lib32-mesa --needed --noconfirm
 fi
+
+cho -ne "
+-------------------------------------------------------------------------
+                    Checking for low memory systems <8G
+-------------------------------------------------------------------------
+"
+TOTALMEM=$(cat /proc/meminfo | grep -i 'memtotal' | grep -o '[[:digit:]]*')
+if [[  $TOTALMEM -lt 8000000 ]]; then
+    # Put swap into the actual system, not into RAM disk, otherwise there is no point in it, it'll cache RAM into RAM. So, /mnt/ everything.
+    #mkdir /mnt/opt/swap # make a dir that we can apply NOCOW to to make it btrfs-friendly.
+    chattr +C /mnt/swap # apply NOCOW, btrfs needs that.
+    dd if=/dev/zero of=/mnt/swap/swapfile bs=1M count=2048 status=progress
+    chmod 600 /mnt/swap/swapfile # set permissions.
+    chown root /mnt/swap/swapfile
+    mkswap /mnt/swap/swapfile
+    swapon /mnt/swap/swapfile
+    # The line below is written to /mnt/ but doesn't contain /mnt/, since it's just / for the system itself.
+    echo "/swap/swapfile	none	swap	sw	0	0" >> /mnt/etc/fstab # Add swap to fstab, so it KEEPS working after installation.
+fi
+
 grub-install --target=i386-pc /dev/sda # replace sdx with your disk name, not the partition
 grub-mkconfig -o /boot/grub/grub.cfg
 
@@ -76,34 +97,4 @@ systemctl enable NetworkManager
 sed -i 's/^MODULES()/MODULES(btrfs)/' /etc/mkinitcpio.conf
 mkinitcpio -p linux-zen
 
-#Snapper Configuration
-umount /.snapshots/
-rm -rf /.snapshots/
 
-snapper -c root create-config /
-sed -i 's/^ALLOW_USERS=""/ALLOW_USERS="gaeriel"/' /etc/snapper/configs/root
-sed -i 's/^TIMELINE_LIMIT_YEARLY="10"/TIMELINE_LIMIT_YEARLY="0"/' /etc/snapper/configs/root
-sed -i 's/^TIMELINE_LIMIT_MONTHLY="10"/TIMELINE_LIMIT_MONTHLY="7"/' /etc/snapper/configs/root
-sed -i 's/^TIMELINE_LIMIT_WEEKLY="0"/TIMELINE_LIMIT_WEEKLY="10"/' /etc/snapper/configs/root
-sed -i 's/^TIMELINE_LIMIT_HOURLY="10"/TIMELINE_LIMIT_HOURLY="5"/' /etc/snapper/configs/root
-
-chmod a+rx /.snapshots/
-systemctl start snapper-timeline.timer
-systemctl enable snapper-timeline.timer
-systemctl start snapper-cleanup.timer
-systemctl enable snapper-cleanup.timer
-systemctl start grub-btrfs.path
-systemctl enable grub-btrfs.path
-
-echo "[Trigger]
-Operation = Upgrade
-Operation = Install
-Operation = Remove
-Type = Package
-Target = linux*
-
-[Action]
-Depends = rsync
-Description = Backing up /boot...
-When = PreTransaction
-Exec = /usr/bin/rsync -a --delete /boot /.bootbackup" >> /usr/share/libalpm/hooks/50_bootbackup
