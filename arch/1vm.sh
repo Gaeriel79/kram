@@ -12,6 +12,8 @@ echo -ne "
 #DEBUG
 #DEBUG
 #DEBUG
+echo "------------"
+echo "Enter new password for root account"
 passwd
 systemctl start sshd.service
 #set -x

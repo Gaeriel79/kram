@@ -2,8 +2,8 @@
 #DEBUG
 #DEBUG
 #DEBUG
-set -x
-trap read debug
+#set -x
+#trap read debug
 #DEBUG
 #DEBUG
 #DEBUG
