@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 #-------------------------------------------------------------------------
 #source setup.conf
+SCRIPT_DIR="$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )"
 timedatectl set-ntp true
 pacman -S --noconfirm pacman-contrib terminus-font
 setfont ter-v22b
