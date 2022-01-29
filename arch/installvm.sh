@@ -6,5 +6,5 @@ chmod +x 3post.sh
 
 
 ./1vm.sh
-./2vm.sh
-./3post.sh
+#./2vm.sh
+#./3post.sh

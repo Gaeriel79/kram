@@ -85,7 +85,7 @@ if [[  $TOTALMEM -lt 8000000 ]]; then
     mkswap /swap/swapfile
     swapon /swap/swapfile
     # The line below is written to /mnt/ but doesn't contain /mnt/, since it's just / for the system itself.
-    echo "/swap/swapfile	none	swap	sw	0	0" >> /mnt/etc/fstab # Add swap to fstab, so it KEEPS working after installation.
+    echo "/swap/swapfile	none	swap	sw	0	0" >> /etc/fstab # Add swap to fstab, so it KEEPS working after installation.
 fi
 
 grub-install --target=i386-pc /dev/sda # replace sdx with your disk name, not the partition
@@ -97,3 +97,4 @@ systemctl enable NetworkManager
 sed -i 's/^MODULES()/MODULES(btrfs)/' /etc/mkinitcpio.conf
 mkinitcpio -p linux-zen
 exit
+./3post.sh

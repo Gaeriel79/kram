@@ -85,4 +85,5 @@ mkdir /mnt/root/arch
 cp -R ${SCRIPT_DIR} /mnt/root/
 cp /etc/pacman.d/mirrorlist /mnt/etc/pacman.d/mirrorlist
 arch-chroot /mnt
-
+cd root/arch
+./2vm.sh
