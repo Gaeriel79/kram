@@ -1,38 +1,5 @@
 #!/usr/bin/env bash
 #-------------------------------------------------------------------------
-echo -ne "
- ██████╗  █████╗ ███████╗██████╗ ██╗███████╗██╗  ███████╗ █████╗ 
-██╔════╝ ██╔══██╗██╔════╝██╔══██╗██║██╔════╝██║  ╚════██║██╔══██╗
-██║  ███╗███████║█████╗  ██████╔╝██║█████╗  ██║      ██╔╝╚██████║
-██║   ██║██╔══██║██╔══╝  ██╔══██╗██║██╔══╝  ██║     ██╔╝  ╚═══██║
-╚██████╔╝██║  ██║███████╗██║  ██║██║███████╗███████╗██║   █████╔╝
- ╚═════╝ ╚═╝  ╚═╝╚══════╝╚═╝  ╚═╝╚═╝╚══════╝╚══════╝╚═╝   ╚════╝                                                                 
-"
-
-#DEBUG
-#DEBUG
-#DEBUG
-echo "------------"
-echo "Enter new password for root account"
-passwd
-systemctl start sshd.service
-#set -x
-#trap read debug
-ip a
-#DEBUG
-#DEBUG
-#DEBUG
-
-SCRIPT_DIR="$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )"
-#loadkeys de-latin1
-
-#local pacman proxy
-chmod +x proxy.sh
-./proxy.sh
-
-#make additional scripts executeable
-chmod +x 1post.sh
-
 #source setup.conf
 timedatectl set-ntp true
 pacman -S --noconfirm pacman-contrib terminus-font
@@ -86,6 +53,3 @@ genfstab -U /mnt >> /mnt/etc/fstab
 mkdir /mnt/root/arch
 cp -R ${SCRIPT_DIR} /mnt/root/
 cp /etc/pacman.d/mirrorlist /mnt/etc/pacman.d/mirrorlist
-arch-chroot /mnt
-cd root/arch
-./2vm.sh

@@ -96,5 +96,3 @@ systemctl enable NetworkManager
 
 sed -i 's/^MODULES()/MODULES(btrfs)/' /etc/mkinitcpio.conf
 mkinitcpio -p linux-zen
-exit
-./3post.sh
