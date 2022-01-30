@@ -19,7 +19,7 @@ sed -i 's/^TIMELINE_LIMIT_MONTHLY="10"/TIMELINE_LIMIT_MONTHLY="7"/' /etc/snapper
 sed -i 's/^TIMELINE_LIMIT_WEEKLY="0"/TIMELINE_LIMIT_WEEKLY="10"/' /etc/snapper/configs/root
 sed -i 's/^TIMELINE_LIMIT_HOURLY="10"/TIMELINE_LIMIT_HOURLY="5"/' /etc/snapper/configs/root
 
-chmod a+rx /mnt/.snapshots
+chmod a+rx .snapshots
 systemctl start snapper-timeline.timer
 systemctl enable snapper-timeline.timer
 systemctl start snapper-cleanup.timer
@@ -48,9 +48,11 @@ sudo systemctl enable bluetooth.service
 
 useradd -m gaeriel
 echo gaeriel:password | chpasswd
-usermod -aG libvirt gaeriel
+usermod -aG wheel gaeriel
+SCRIPT_DIR="$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )"
+p -R ${SCRIPT_DIR} /mnt/home/gaeriel
 
-echo "ermanno ALL=(ALL) ALL" >> /etc/sudoers.d/gaeriel
+echo "gaeriel ALL=(ALL) ALL" >> /etc/sudoers.d/gaeriel
 
 
 printf "\e[1;32mDone! Type exit, umount -a and reboot.\e[0m"

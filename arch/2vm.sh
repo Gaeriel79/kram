@@ -94,6 +94,6 @@ systemctl enable NetworkManager
 
 sed -i 's/^MODULES()/MODULES(btrfs)/' /etc/mkinitcpio.conf
 mkinitcpio -p linux-zen
-printf "\e[1;31m------------------------------------\e[0m"
+#printf "\e[1;31m------------------------------------\e[0m"
 printf "\e[1;31mEnter new password for root account:\e[0m"
 passwd
