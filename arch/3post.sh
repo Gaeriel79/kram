@@ -9,10 +9,10 @@ trap read debug
 #DEBUG
 #DEBUG
 #DEBUG
-umount /mnt/.snapshots
-rm -rf /mnt/.snapshots
+umount .snapshots
+rm -rf .snapshots
 
-snapper -c root create-config /
+snapper --no-dbus -c root create-config /
 sed -i 's/^ALLOW_USERS=""/ALLOW_USERS="gaeriel"/' /etc/snapper/configs/root
 sed -i 's/^TIMELINE_LIMIT_YEARLY="10"/TIMELINE_LIMIT_YEARLY="0"/' /etc/snapper/configs/root
 sed -i 's/^TIMELINE_LIMIT_MONTHLY="10"/TIMELINE_LIMIT_MONTHLY="7"/' /etc/snapper/configs/root
