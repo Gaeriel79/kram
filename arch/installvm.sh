@@ -20,8 +20,8 @@ echo "------------"
 echo "Enter new password for temporary root account"
 passwd
 systemctl start sshd.service
-#set -x
-#trap read debug
+set -x
+trap read debug
 #DEBUG
 #DEBUG
 #DEBUG
@@ -34,7 +34,7 @@ chmod +x proxy.sh
 SCRIPT_DIR="$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )"
 
 #local pacman proxy
-bash ./proxy.sh
+bash proxy.sh
 bash 1vm.sh
 arch-chroot /mnt /root/arch/2vm.sh
 arch-chroot /mnt /root/arch/3post.sh
