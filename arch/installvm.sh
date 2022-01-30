@@ -15,13 +15,13 @@ echo -ne "
 #DEBUG
 #DEBUG
 #DEBUG
-#echo "------------"
-#echo "Enter new password for temporary root account"
-#passwd
-#systemctl start sshd.service
+echo "------------"
+echo "Enter new password for temporary root account"
+passwd
+systemctl start sshd.service
 #set -x
 #trap read debug
-#ip a
+ip a
 #DEBUG
 #DEBUG
 #DEBUG

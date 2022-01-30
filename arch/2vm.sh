@@ -20,8 +20,6 @@ echo "archvm" >> /etc/hostname
 echo "127.0.0.1 localhost" >> /etc/hosts
 echo "::1       localhost" >> /etc/hosts
 echo "127.0.1.1 archvm.localdomain archvm" >> /etc/hosts
-echo "root Passwort ändern"
-#passwd
 
 echo -ne "
 -------------------------------------------------------------------------

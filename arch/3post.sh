@@ -1,6 +1,14 @@
 #!/usr/bin/env bash
 #Snapper Configuration
 pacman -S snapper snap-pac --noconfirm --needed
+#DEBUG
+#DEBUG
+#DEBUG
+#set -x
+#trap read debug
+#DEBUG
+#DEBUG
+#DEBUG
 umount /mnt/.snapshots
 rm -rf /mnt/.snapshots
 
@@ -31,3 +39,18 @@ Depends = rsync
 Description = Backing up /boot...
 When = PreTransaction
 Exec = /usr/bin/rsync -a --delete /boot /.bootbackup" >> /usr/share/libalpm/hooks/50_bootbackup
+
+#pipewire
+sudo pacman -S --noconfirm --needed pipewire pipewire-media-session pipewire-alsa pipewire-jack pipewire-zeroconf
+sudo pacman -R --noconfirm pulseaudio-equalizer-ladspa pulseaudio-alsa gnome-bluetooth blueberry pulseaudio-bluetooth pulseaudio
+sudo pacman -S --noconfirm --needed pipewire-pulse blueberry pavucontrol
+sudo systemctl enable bluetooth.service
+
+useradd -m gaeriel
+echo gaeriel:password | chpasswd
+usermod -aG libvirt gaeriel
+
+echo "ermanno ALL=(ALL) ALL" >> /etc/sudoers.d/gaeriel
+
+
+printf "\e[1;32mDone! Type exit, umount -a and reboot.\e[0m"

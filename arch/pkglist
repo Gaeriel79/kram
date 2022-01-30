@@ -4,12 +4,10 @@ acpid
 alsa-utils
 archlinux-keyring
 avahi
-base-devel
 bash-completion
 bluez
 bluez-utils
 bridge-utils
-btrfs-progs
 cronie
 cups
 dhclient
@@ -47,7 +45,6 @@ picom
 pulseaudio
 reflector
 rsync
-snapper
 sof-firmware
 sudo
 terminus-font
