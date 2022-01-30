@@ -53,6 +53,6 @@ SCRIPT_DIR="$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
 p -R ${SCRIPT_DIR} /mnt/home/gaeriel
 
 echo "gaeriel ALL=(ALL) ALL" >> /etc/sudoers.d/gaeriel
-
+echo "Test" > /mnt/home/gaeriel/.bashrc
 
 printf "\e[1;32mDone! Type exit, umount -a and reboot.\e[0m"
