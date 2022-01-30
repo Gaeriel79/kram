@@ -1,14 +1,7 @@
 #!/usr/bin/env bash
 #Snapper Configuration
 pacman -S snapper snap-pac --noconfirm --needed
-#DEBUG
-#DEBUG
-#DEBUG
-set -x
-trap read debug
-#DEBUG
-#DEBUG
-#DEBUG
+
 umount .snapshots
 rm -rf .snapshots
 
