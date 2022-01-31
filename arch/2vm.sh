@@ -21,6 +21,8 @@ echo "127.0.0.1 localhost" >> /etc/hosts
 echo "::1       localhost" >> /etc/hosts
 echo "127.0.1.1 archvm.localdomain archvm" >> /etc/hosts
 
+sed -i 's/^#ParallelDownloads/ParallelDownloads/' /etc/pacman.conf
+
 echo -ne "
 -------------------------------------------------------------------------
                     Installing Base System  
