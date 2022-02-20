@@ -1,4 +1,14 @@
+base-devel
 grub-btrfs
+kitty
 network-manager-applet
 networkmanager
+nitrogen
+picom
 rsync
+xf86-video-fbdev
+xmonad
+xmonad-contrib
+xorg
+xorg-xinit
+xterm
