@@ -3,13 +3,13 @@
 #Systemupdates
 #---------------------------------------
 
-#apt get update && apt full-upgrade
+#apt update && apt full-upgrade
 
 #Software
 #---------------------------------------
 
 apt update
-apt install neofetch unattended-upgrades
+apt install neofetch unattended-upgrades fail2ban
 #btop++
 wget -qO btop.tbz https://github.com/aristocratos/btop/releases/latest/download/btop-x86_64-linux-musl.tbz
 sudo tar xf btop.tbz -C /usr/local bin/btop
@@ -40,3 +40,6 @@ systemctl disable rpcbind
 systemctl mask rpcbind
 systemctl stop rpcbind.socket
 systemctl disable rpcbind.socket
+
+#Fail2ban
+systemctl enable fail2ban --now
