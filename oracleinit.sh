@@ -42,21 +42,8 @@ mkdir .ssh
 chown gaeriel:gaeriel .ssh
 
 #SSH configuration
-echo -ne "
------------------------------------------------------------------
-Copy, modify and execute the following line into Windows-Terminal / Powershell
-!!BEFORE!! continuing.
-scp $env:USERPROFILE/.ssh/oracle1.pub gaeriel@144.24.180.9:~/.ssh/authorized_keys
------------------------------------------------------------------
-"
-for i in {30..01}
-do
-tput cup 10 $l
-echo -n "$i"
-sleep 1
-done
-
-read -r -s -p $'Press enter to continue...'
+cp -r /home/ubuntu/.ssh /home/gaeriel
+chown -R gaeriel:gaeriel /home/gaeriel/.ssh
 sed -i 's/^#PermitRootLogin prohibit-password/PermitRootLogin no/' /etc/ssh/sshd_config
 sed -i 's/^PasswordAuthentication yes/PasswordAuthentication no/' /etc/ssh/sshd_config
 sed -i 's/^#PubkeyAuthentication yes/PubkeyAuthentication yes/' /etc/ssh/sshd_config
